@@ -7,3 +7,7 @@ zig-out/
 /build/
 /build-*/
 /docgen_tmp/
+
+# Added by cargo
+
+/target
