@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-const int BUFFER_SIZE = 4096;
+#define BUFFER_SIZE 4096
 
 int main() {
   FILE *file = fopen("./src/day02/input.txt", "r");

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-const int BUFFER_SIZE = 4096;
+#define BUFFER_SIZE 4096
 
 int main() {
   FILE *file = fopen("./src/day02/input.txt", "r");
@@ -73,17 +73,31 @@ int main() {
         digits++;
       }
 
-      if (digits % 2 != 0)
-        continue;
+      for (int j = 1; j < digits / 2 + 1; j++) {
+        bool is_invalid = true;
 
-      int half = digits / 2;
-      long long divisor = pow10[half];
+        if (digits % j != 0)
+          continue;
 
-      long long left = i / divisor;
-      long long right = i % divisor;
+        long long divisor = pow10[j];
 
-      if (left == right)
-        total += i;
+        int first = i % divisor;
+        long long value = i;
+        for (int z = 1; z < digits / j; z++) {
+
+          value /= divisor;
+          int second = value % divisor;
+          if (first != second) {
+            is_invalid = false;
+            break;
+          }
+          first = second;
+        }
+        if (is_invalid) {
+          total += i;
+          break;
+        }
+      }
     }
 
     start = comma_loc + 1;
